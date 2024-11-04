@@ -1,5 +1,6 @@
 package br.com.fiap.service;
 
+import br.com.fiap.domain.ClienteInput;
 import br.com.fiap.domain.RepositorioClientes;
 import br.com.fiap.domain.RepositorioLogin;
 import br.com.fiap.domain.model.Cliente;
@@ -14,7 +15,7 @@ public class ClienteService {
         this.repositorioLogin = repositorioLogin;
     }
 
-    public void salvarCliente(Cliente cliente) {
+    public void salvarCliente(ClienteInput cliente) {
 
         if (cliente.getNomeCliente().length() < 3) {
             throw new RuntimeException("Nome inválido");
@@ -26,7 +27,11 @@ public class ClienteService {
             throw new RuntimeException("CPF inválido");
         }
 
-        repositorioClientes.salvarCliente(cliente);
+        repositorioClientes.salvarCliente(new Cliente(cliente.getNomeCliente(),
+                cliente.getEmailCliente(), cliente.getCpfCliente()));
+
+        Long idCliente = repositorioClientes.retornarIdPorEmail(cliente.getEmailCliente());
+        repositorioLogin.salvarLogin(new Login(cliente.getEmailCliente(), cliente.getSenha()), idCliente);
         repositorioClientes.fecharConexao();
         repositorioLogin.fecharConexao();
     }

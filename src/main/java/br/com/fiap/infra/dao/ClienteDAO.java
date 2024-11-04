@@ -31,6 +31,27 @@ public class ClienteDAO implements RepositorioClientes {
         return id;
     }
 
+    public Long retornarIdPorEmail(String email) {
+
+        String sqlSelect = "SELECT * FROM TB_CLIENTE WHERE email_cliente = ?";
+        Long id = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getLong("id_cliente");
+            }
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
+
     public void salvarCliente(Cliente cliente) {
         String sqlInsert = """
                 INSERT INTO TB_CLIENTE VALUES (?, ?, ?, ?)

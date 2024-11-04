@@ -32,6 +32,22 @@ public class LoginDAO implements RepositorioLogin {
         return id;
     }
 
+    public void salvarLogin(Login login, Long idCliente) {
+        String sqlInsert = """
+                INSERT INTO TB_LOGIN VALUES (?, ?, ?)
+                """;
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sqlInsert);
+            ps.setLong(1, idCliente);
+            ps.setString(2, login.getLogin());
+            ps.setString(3, login.getSenha());
+            ps.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public Login fazerLogin(Login login) {
         String sqlSelect = """

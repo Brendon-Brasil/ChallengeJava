@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarroDAO implements RepositorioCarros {
     private Connection conexao;
@@ -58,6 +60,32 @@ public class CarroDAO implements RepositorioCarros {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Carro> pegarCarrosDoUsuario(Long idCliente) {
+        String sqlSelect = "SELECT * FROM TB_CARRO WHERE id_cliente = ?";
+        List<Carro> carros = new ArrayList<>();
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setLong(1, idCliente);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Carro carro = new Carro();
+                carro.setAnoCarro(rs.getInt("ano_carro"));
+                carro.setMarcaCarro(rs.getString("marca_carro"));
+                carro.setModeloCarro(rs.getString("modelo_carro"));
+                carro.setPlacaCarro(rs.getString("placa_carro"));
+                carro.setIdCliente(Math.toIntExact(idCliente));
+                carros.add(carro);
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return carros;
     }
 
 }

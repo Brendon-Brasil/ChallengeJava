@@ -5,4 +5,5 @@ import br.com.fiap.domain.model.Login;
 public interface RepositorioLogin {
     Login fazerLogin(Login login);
     void fecharConexao();
+    void salvarLogin(Login login, Long idCliente);
 }

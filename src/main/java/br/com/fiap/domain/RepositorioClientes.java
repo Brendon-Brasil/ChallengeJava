@@ -6,5 +6,6 @@ public interface RepositorioClientes {
     Long obterId();
     void salvarCliente(Cliente cliente);
     void fecharConexao();
+    Long retornarIdPorEmail(String email);
 
 }
