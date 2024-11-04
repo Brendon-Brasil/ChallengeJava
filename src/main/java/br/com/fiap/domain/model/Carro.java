@@ -1,4 +1,4 @@
-package br.com.fiap.model;
+package br.com.fiap.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,9 +12,9 @@ public class Carro {
     @JsonProperty
     private String placaCarro;
     @JsonProperty
-    private Long idCliente;
+    private Integer idCliente;
 
-    public Carro(String modeloCarro, Integer anoCarro, String marcaCarro, String placaCarro, Long idCliente) {
+    public Carro(String modeloCarro, Integer anoCarro, String marcaCarro, String placaCarro, Integer idCliente) {
         this.modeloCarro = modeloCarro;
         this.anoCarro = anoCarro;
         this.marcaCarro = marcaCarro;
@@ -57,11 +57,11 @@ public class Carro {
         this.placaCarro = placaCarro;
     }
 
-    public Long getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Long idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 }

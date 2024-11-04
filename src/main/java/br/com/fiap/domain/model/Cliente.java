@@ -1,4 +1,4 @@
-package br.com.fiap.model;
+package br.com.fiap.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -41,5 +41,14 @@ public class Cliente {
 
     public void setCpfCliente(String cpfCliente) {
         this.cpfCliente = cpfCliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nomeCliente='" + nomeCliente + '\'' +
+                ", emailCliente='" + emailCliente + '\'' +
+                ", cpfCliente='" + cpfCliente + '\'' +
+                '}';
     }
 }

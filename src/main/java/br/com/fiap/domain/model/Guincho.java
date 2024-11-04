@@ -1,4 +1,4 @@
-package br.com.fiap.model;
+package br.com.fiap.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
